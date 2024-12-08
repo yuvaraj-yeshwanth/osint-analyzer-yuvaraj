@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import re
 import argparse
 
+
 def fetch_html(url):
     """Fetches the HTML content of a given URL."""
     try:
@@ -13,13 +14,16 @@ def fetch_html(url):
         print(f"Error fetching URL: {e}")
         return None
 
+
 def extract_emails(html):
     """Extracts email addresses from the HTML content."""
     return re.findall(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", html)
 
+
 def extract_phone_numbers(html):
     """Extracts phone numbers from the HTML content."""
     return re.findall(r"\+?\d[\d -]{8,15}\d", html)
+
 
 def extract_social_links(html):
     """Extracts social media profile links from the HTML content."""
@@ -30,24 +34,30 @@ def extract_social_links(html):
             links.append(anchor["href"])
     return links
 
+
 def main():
+    """Main function for OSINT Analyzer CLI."""
     parser = argparse.ArgumentParser(description="OSINT Analyzer by Yuvaraj")
-    parser.add_argument("-u", "--url", required=True, help="Target website URL")
+    parser.add_argument(
+        "-u", "--url", required=True, help="Target website URL to analyze for OSINT data"
+    )
     args = parser.parse_args()
 
     html = fetch_html(args.url)
     if not html:
         return
 
+    # Perform analysis
     print("\n--- OSINT Results ---")
     emails = extract_emails(html)
-    print(f"Emails Found: {emails}")
+    print(f"Emails Found: {emails if emails else 'No emails found'}")
 
     phone_numbers = extract_phone_numbers(html)
-    print(f"Phone Numbers Found: {phone_numbers}")
+    print(f"Phone Numbers Found: {phone_numbers if phone_numbers else 'No phone numbers found'}")
 
     social_links = extract_social_links(html)
-    print(f"Social Media Links Found: {social_links}")
+    print(f"Social Media Links Found: {social_links if social_links else 'No social media links found'}")
+
 
 if __name__ == "__main__":
     main()
