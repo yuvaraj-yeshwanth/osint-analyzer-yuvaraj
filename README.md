@@ -19,3 +19,10 @@ Clone the repository to your local machine:
 ```bash
 git clone https://github.com/Yuvaraj/osint-analyzer-yuvaraj.git
 cd osint-analyzer-yuvaraj
+
+## Cloning the Repository
+
+You can clone this repository without a username or password by running:
+
+```bash
+git clone https://github.com/Yuvaraj/osint-analyzer-yuvaraj.git
