@@ -1,1 +1,20 @@
-MIT License
+
+---
+
+## 🔐 **Step 4: Secure Environment Variables (Optional)**
+
+If you ever add token-based features later, ensure tokens are optional and securely passed using environment variables instead of embedding them.
+
+### Example of Environment Variable Usage:
+
+Update the script logic only if token usage becomes necessary in the future:
+
+```python
+import os
+
+
+token = os.getenv("GITHUB_TOKEN", "")
+if token:
+    print("Token loaded successfully.")
+else:
+    print("Token not configured. Proceeding securely.")
